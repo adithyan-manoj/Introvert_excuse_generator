@@ -1,21 +1,21 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# Introvert Excuse Generator 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Useful-Sa
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: [Adithyan Manoj] - [Sree Chitra Thirunal College of Engineering]
+- Member 2: [Sneha S A] - [Sree Chitra Thirunal College of Engineering]
+
 
 ### Project Description
-[2-3 lines about what your project does]
 
+A Flutter mobile app integrated with a Flask backend that leverages Gemini API to provide advanced AI-powered features. The backend handles API requests securely, while the Flutter frontend offers a seamless user experience.
 ### The Problem (that doesn't exist)
 [What ridiculous problem are you solving?]
 
