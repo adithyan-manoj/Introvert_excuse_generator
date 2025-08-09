@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
 
-  static const String baseUrl = "http://10.232.57.152:5000";
+  static const String baseUrl = "https://introvert-excuse-generator.onrender.com";
 
   static Future<Map<String, dynamic>> generateExcuse({
     required String context,
