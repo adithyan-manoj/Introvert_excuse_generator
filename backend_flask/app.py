@@ -1,18 +1,17 @@
-# flask_backend/app.py
+
 import os
 import random
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# load .env
+
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Try to import the Gemini SDK if available
 use_gemini = False
 try:
-    import google.generativeai as genai  # type: ignore
+    import google.generativeai as genai 
     if GEMINI_API_KEY:
         genai.configure(api_key=GEMINI_API_KEY)
         use_gemini = True
@@ -23,7 +22,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-# ---- Simple template bank (fallback) ----
+
 TEMPLATES = {
     "general": {
         "polite": [
@@ -92,14 +91,13 @@ def pick_template(category: str, tone: str, length: str, context: str) -> str:
     choices = tone_map[tone]
     excuse = random.choice(choices)
 
-    # If context is provided, try to make a small contextual addition (short)
+    
     if context and len(excuse) < 120:
         excuse = f"{excuse} ({context})"
-    # Slightly vary by length preference:
+   
     if length == "short":
         return excuse.split(".")[0].strip() + "."
     elif length == "long":
-        # try to concatenate two templates for longer responses
         second = random.choice(choices)
         if second != excuse:
             return f"{excuse} {second}"
@@ -108,7 +106,6 @@ def pick_template(category: str, tone: str, length: str, context: str) -> str:
         return excuse
 
 
-# ---- AI helper (Gemini) ----
 def generate_with_gemini(context: str, category: str, tone: str, length: str) -> str:
     """
     Uses Gemini via google.generativeai library.
@@ -117,7 +114,7 @@ def generate_with_gemini(context: str, category: str, tone: str, length: str) ->
     if not use_gemini:
         raise RuntimeError("Gemini SDK not configured or GEMINI_API_KEY missing.")
 
-    # Build a precise prompt
+    
     length_hint = {
         "short": "1-2 sentence, concise",
         "medium": "2-4 sentences",
@@ -141,10 +138,10 @@ def generate_with_gemini(context: str, category: str, tone: str, length: str) ->
 )
 
 
-    # Example: using generate_content; adapt if your SDK uses another method
-    model = genai.GenerativeModel("gemini-2.5-flash")  # adjust model name if needed
+    
+    model = genai.GenerativeModel("gemini-2.5-flash")  
     response = model.generate_content(prompt)
-    # response may be an object with .text
+    
     text = getattr(response, "text", None)
     if not text and isinstance(response, dict):
         text = response.get("text")
@@ -153,7 +150,7 @@ def generate_with_gemini(context: str, category: str, tone: str, length: str) ->
     return text.strip()
 
 
-# ---- Routes ----
+
 @app.route("/generate", methods=["POST"])
 def generate_excuse():
     try:
@@ -161,23 +158,23 @@ def generate_excuse():
         context = data.get("context", "").strip()
         category = data.get("category", "general").strip().lower()
         tone = data.get("tone", "polite").strip().lower()
-        length = data.get("length", "short").strip().lower()  # short/medium/long
+        length = data.get("length", "short").strip().lower()
         use_ai = bool(data.get("use_ai", False))
 
-        # Basic validation
+        
         if len(context) > 1000:
             return jsonify({"error": "Context too long"}), 400
 
-        # Try AI if requested and configured
+        
         if use_ai and use_gemini:
             try:
                 excuse = generate_with_gemini(context, category, tone, length)
                 return jsonify({"excuse": excuse, "source": "ai"})
             except Exception as e:
-                # log error and fall back to templates
+                
                 print("Gemini error:", e)
 
-        # fallback to template generator
+        
         excuse = pick_template(category, tone, length, context)
         return jsonify({"excuse": excuse, "source": "template"})
 
@@ -191,5 +188,5 @@ def health():
 
 
 if __name__ == "__main__":
-    # Development: use debug=True for local testing only
+   
     app.run(host="0.0.0.0", port=5000)

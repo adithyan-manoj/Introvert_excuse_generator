@@ -1,4 +1,4 @@
-// lib/main.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'services/api_service.dart';
@@ -256,19 +256,19 @@ class _HomePageState extends State<HomePage> {
                         ),
                     ElevatedButton.icon(
                                 onPressed: _result.isEmpty ? null : _copyToClipboard,
-                                icon: const Icon(Icons.copy, color: Colors.white), // Icon color
+                                icon: const Icon(Icons.copy, color: Colors.white), 
                                 label: const Text(
                                   'Copy',
-                                  style: TextStyle(color: Colors.white), // Text color
+                                  style: TextStyle(color: Colors.white), 
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFFF9800),   // Background color
-                                  foregroundColor: const Color.fromARGB(255, 56, 37, 37),  // Text & icon color (if not overridden above)
+                                  backgroundColor: const Color(0xFFFF9800),   
+                                  foregroundColor: const Color.fromARGB(255, 56, 37, 37),  
                                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25),
                                   ),
-                                  elevation: 4, // Shadow depth
+                                  elevation: 4, 
                                 ),
                               )
                       ],
