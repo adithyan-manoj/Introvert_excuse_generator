@@ -57,13 +57,11 @@ python app.py
 # Screenshots (Add at least 3)
 
 [Link Text](https://drive.google.com/drive/folders/1eVvTsgY1_OzFzdtN29geOIe7GS3P9qHn)
-(Add screenshot 1 here with proper name)
+
 When you enter your situation and select the category—such as general, social, work, or family—you also choose the tone you want, whether blunt, funny, or polite, along with the length of the excuse: short, medium, or long. Once you press the Generate Excuse button, the app takes all your choices and creates a fitting excuse tailored to your needs. It either crafts a quick, clever response or picks one from its collection based on your preferences. The generated excuse then appears instantly on your screen, giving you a perfect way to gracefully handle any awkward social moment.
 
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-Add caption explaining your workflow
+
 
 
 
